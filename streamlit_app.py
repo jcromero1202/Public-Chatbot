@@ -88,12 +88,15 @@ def highlight_think(text: str) -> str:
     with a dark gray background and white text.
     """
     pattern = re.compile(r'(<think>)(.*?)(</think>)', re.DOTALL)
-    # Updated style: dark gray background (#444) with white text.
     highlighted = pattern.sub(r'<div style="background-color: #444; color: #fff; padding: 5px; border-radius: 5px;">\2</div>', text)
     return highlighted
 
 def main():
-    # Custom header with two lines: first line is larger, second line is smaller.
+    # Initialize conversation history in session state if not already set.
+    if "history" not in st.session_state:
+        st.session_state.history = []
+    
+    # Custom header with two lines.
     st.markdown(
         """
         <h3>Conversational Chatbot</h3>
@@ -102,16 +105,31 @@ def main():
         unsafe_allow_html=True,
     )
 
+    # Conversation history display.
+    st.markdown("### Conversation History:")
+    for chat in st.session_state.history:
+        if chat["role"] == "user":
+            st.markdown(f"**You:** {chat['text']}")
+        elif chat["role"] == "bot":
+            # Highlight any <think> blocks in the bot response.
+            bot_text = highlight_think(chat["text"])
+            st.markdown(f"**Bot:** {bot_text}", unsafe_allow_html=True)
+
     # Multi-line text area for long messages.
     user_input = st.text_area("Enter your message:", height=150)
-
+    
     # When the "Send" button is clicked, process the input.
     if st.button("Send"):
         if user_input.strip():
+            # Append user message to conversation history.
+            st.session_state.history.append({"role": "user", "text": user_input})
+            
+            # Get bot response.
             answer = run_flow(user_input)
-            # Highlight any <think> blocks in the answer.
-            answer_html = highlight_think(answer)
-            st.markdown(f"**Bot:** {answer_html}", unsafe_allow_html=True)
+            st.session_state.history.append({"role": "bot", "text": answer})
+            
+            # Clear the text area after processing.
+            st.experimental_rerun()
         else:
             st.warning("Please enter a message first.")
 
