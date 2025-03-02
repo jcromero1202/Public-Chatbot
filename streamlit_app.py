@@ -96,17 +96,27 @@ def main():
     if "history" not in st.session_state:
         st.session_state.history = []
     
-    # Custom header with two lines.
+    # Custom header with two centered lines.
     st.markdown(
         """
-        <h3>Conversational Chatbot</h3>
-        <p style="font-size:16px;">enabled by DeepSeek-R1-distill-Qwen32B via Groq</p>
+        <div style="text-align: center;">
+            <h3 style="margin: 0;">Conversational Chatbot</h3>
+            <p style="font-size: 16px; margin: 0;">enabled by DeepSeek-R1-distill-Qwen32B via Groq</p>
+        </div>
         """,
         unsafe_allow_html=True,
     )
-
-    # Conversation history display.
-    st.markdown("### Conversation History:")
+    
+    # Add a space between the title and conversation history.
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Conversation history header with intermediate font size.
+    st.markdown(
+        "<h4 style='font-size:20px;'>Conversation History:</h4>",
+        unsafe_allow_html=True,
+    )
+    
+    # Display conversation history.
     for chat in st.session_state.history:
         if chat["role"] == "user":
             st.markdown(f"**You:** {chat['text']}")
