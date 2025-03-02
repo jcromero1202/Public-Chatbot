@@ -1,0 +1,129 @@
+
+[     UTC     ] Logs for public-chatbot-deepseekr1viagrok.streamlit.app/
+────────────────────────────────────────────────────────────────────────────────────────
+[18:02:43] 🖥 Provisioning machine...
+[18:02:43] 🎛 Preparing system...
+[18:02:43] ⛓ Spinning up manager process...
+[18:02:46] 🚀 Starting up repository: 'public-chatbot', branch: 'main', main module: 'streamlit_app.py'
+[18:02:46] 🐙 Cloning repository...
+[18:02:47] 🐙 Cloning into '/mount/src/public-chatbot'...
+
+[18:02:47] 🐙 Cloned repository!
+[18:02:47] 🐙 Pulling code changes from Github...
+[18:02:47] 📦 Processing dependencies...
+
+──────────────────────────────────────── uv ───────────────────────────────────────────
+
+Using uv pip install.
+Using Python 3.11.11 environment at /home/adminuser/venv
+Resolved 47 packages in 582ms
+Prepared 47 packages in 3.61s
+Installed 47 packages in 141ms
+ + altair==5.5.0
+ + attrs==25.1.0
+ + blinker==1.9.0
+ + cachetools==5.5.2
+ + certifi==2025.1.31
+ + charset-normalizer==3.4.1
+ + click==8.1.8
+ [2025-03-02 18:02:52.619955] + gitdb==4.0.12
+ + gitpython==3.1.44
+ + idna==3.10
+ + importlib-metadata==6.11.0
+ + jinja2==3.1.5
+ + jsonschema==4.23.0
+ + jsonschema-specifications==2024.10.1
+ + markdown-it-py==3.0.0
+ + markupsafe==3.0.2
+ + mdurl==0.1.2
+ + narwhals==1.28.0[2025-03-02 18:02:52.620215] 
+ + numpy==1.26.4
+ + packaging==23.2
+ + pandas==2.2.3
+ + pillow==9.4.0
+ + protobuf==4.25.6
+ + pyarrow==19.0.1
+ + pydeck==0.9.1
+ + pygments==2.19.1
+ + pympler==1.1
+ + python-dateutil==2.9.0.post0
+ + pytz==2025.1
+ + pytz-deprecation-shim==0.1.0.post0
+ + referencing==0.36.2
+ + requests==2.31.0
+ + rich==13.9.4
+ + rpds-py==0.23.1
+ + six==1.17.0[2025-03-02 18:02:52.620378] 
+ + smmap==5.0.2
+ + streamlit==1.25.0
+ + tenacity==8.5.0
+ + toml==0.10.2
+ + tornado==6.4.2
+ + typing-extensions==4.12.2
+ [2025-03-02 18:02:52.620543] + tzdata==2025.1
+ + tzlocal==4.3.1
+ + urllib3==2.3.0
+ [2025-03-02 18:02:52.620737] + validators==0.34.0
+ + watchdog==6.0.0
+ + zipp==3.21.0
+Checking if Streamlit is installed
+Found Streamlit version 1.25.0 in the environment
+Installing rich for an improved exception logging
+Using uv pip install.
+Using Python 3.11.11 environment at /home/adminuser/venv
+Audited 1 package in 4ms
+
+────────────────────────────────────────────────────────────────────────────────────────
+
+[18:02:57] 🐍 Python dependencies were installed from /mount/src/public-chatbot/requirements.txt using uv.
+Check if streamlit is installed
+Streamlit is already installed
+[18:02:58] 📦 Processed dependencies!
+
+
+
+────────────────────── Traceback (most recent call last) ───────────────────────
+  /home/adminuser/venv/lib/python3.11/site-packages/streamlit/runtime/scriptru  
+  nner/script_runner.py:552 in _run_script                                      
+                                                                                
+  /mount/src/public-chatbot/streamlit_app.py:5 in <module>                      
+                                                                                
+     2 import streamlit as st                                                   
+     3 import requests                                                          
+     4 import json                                                              
+  ❱  5 from dotenv import load_dotenv                                           
+     6                                                                          
+     7 # For local development, load environment variables from the .env file.  
+     8 # In Streamlit Cloud, st.secrets will be available.                      
+────────────────────────────────────────────────────────────────────────────────
+ModuleNotFoundError: No module named 'dotenv'
+────────────────────── Traceback (most recent call last) ───────────────────────
+  /home/adminuser/venv/lib/python3.11/site-packages/streamlit/runtime/scriptru  
+  nner/script_runner.py:552 in _run_script                                      
+                                                                                
+  /mount/src/public-chatbot/streamlit_app.py:5 in <module>                      
+                                                                                
+     2 import streamlit as st                                                   
+     3 import requests                                                          
+     4 import json                                                              
+  ❱  5 from dotenv import load_dotenv                                           
+     6                                                                          
+     7 # For local development, load environment variables from the .env file.  
+     8 # In Streamlit Cloud, st.secrets will be available.                      
+────────────────────────────────────────────────────────────────────────────────
+ModuleNotFoundError: No module named 'dotenv'
+────────────────────── Traceback (most recent call last) ───────────────────────
+  /home/adminuser/venv/lib/python3.11/site-packages/streamlit/runtime/scriptru  
+  nner/script_runner.py:552 in _run_script                                      
+                                                                                
+  /mount/src/public-chatbot/streamlit_app.py:5 in <module>                      
+                                                                                
+     2 import streamlit as st                                                   
+     3 import requests                                                          
+     4 import json                                                              
+  ❱  5 from dotenv import load_dotenv                                           
+     6                                                                          
+     7 # For local development, load environment variables from the .env file.  
+     8 # In Streamlit Cloud, st.secrets will be available.                      
+────────────────────────────────────────────────────────────────────────────────
+ModuleNotFoundError: No module named 'dotenv'
