@@ -101,7 +101,7 @@ def main():
         """
         <div style="text-align: center;">
             <h3 style="margin: 0;">Conversational Chatbot</h3>
-            <p style="font-size: 16px; margin: 0;">enabled by DeepSeek-R1-distill-Qwen32B via Groq</p>
+            <p style="font-size: 16px; margin: 0;">enabled by DeepSeek-R1-distill-Qwen32B with Inference via Groq</p>
         </div>
         """,
         unsafe_allow_html=True,
