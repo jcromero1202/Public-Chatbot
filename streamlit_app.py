@@ -84,7 +84,7 @@ def run_flow(user_message: str) -> str:
 def main():
     # Custom header (smaller than st.title but bigger than normal text)
     st.markdown(
-        "<h3 style='text-align: center;'>Conversational Chatbot enabled by DeepSeek-R1-distill-Qwen32B via Grok</h3>",
+        "<h3 style='text-align: left;'>Conversational Chatbot enabled by DeepSeek-R1-distill-Qwen32B via Grok</h3>",
         unsafe_allow_html=True,
     )
 
