@@ -52,8 +52,11 @@ def run_flow(user_message: str) -> str:
     response = requests.post(endpoint, json=payload, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        # Return the 'output' from the API response, or a default message if key is missing
-        return data.get("Text", "No output found in response.")
+        # Optional: uncomment the next line to see the full API response for debugging
+        # st.write("Debug API response:", data)
+        # Try to retrieve the output using both "Text" and "text" keys.
+        output = data.get("Text") or data.get("text")
+        return output if output else "No output found in response."
     else:
         # Return an error message if the request failed
         return f"Error: {response.status_code} - {response.text}"
