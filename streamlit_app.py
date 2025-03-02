@@ -53,7 +53,7 @@ def run_flow(user_message: str) -> str:
     if response.status_code == 200:
         data = response.json()
         # Return the 'output' from the API response, or a default message if key is missing
-        return data.get("output", "No output found in response.")
+        return data.get("Text", "No output found in response.")
     else:
         # Return an error message if the request failed
         return f"Error: {response.status_code} - {response.text}"
