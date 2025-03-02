@@ -49,16 +49,29 @@ def run_flow(user_message: str) -> str:
     response = requests.post(endpoint, json=payload, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        # Uncomment this line to display the full API response for debugging.
         st.write("Debug: API response", json.dumps(data, indent=2))
-        # Try to retrieve the output using both keys.
+        # First, check for a top-level key.
         output = data.get("Text") or data.get("text")
         if output:
             return output
-        else:
-            st.error("No output found. API response structure is unexpected:")
-            st.json(data)
-            return "Error: Unexpected API response structure. Please check the debug output above."
+        # If not found, try to extract from the nested structure.
+        outputs = data.get("outputs")
+        if outputs and isinstance(outputs, list) and len(outputs) > 0:
+            nested_outputs = outputs[0].get("outputs")
+            if nested_outputs and isinstance(nested_outputs, list) and len(nested_outputs) > 0:
+                results = nested_outputs[0].get("results", {})
+                message = results.get("message", {})
+                # Check if the text is in the "data" sub-dictionary.
+                if "data" in message and isinstance(message["data"], dict):
+                    text = message["data"].get("text")
+                    if text:
+                        return text
+                # Fallback to check directly in message.
+                if message.get("text"):
+                    return message.get("text")
+        st.error("No output found. API response structure is unexpected:")
+        st.json(data)
+        return "Error: Unexpected API response structure. Please check the debug output above."
     else:
         error_msg = f"Error: {response.status_code} - {response.text}"
         st.error(error_msg)
@@ -70,7 +83,7 @@ def run_flow(user_message: str) -> str:
 # --------------------------
 def main():
     # Display the title of the app
-    st.title("My Conversational Chatbot")
+    st.title("Conversational Chatbot with DeepSeek-r1-distill-Qwen-32B via Grok")
 
     # Input field for the user to type a message
     user_input = st.text_input("Enter your message:")
