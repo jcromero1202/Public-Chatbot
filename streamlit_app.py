@@ -2,6 +2,7 @@ import os
 import streamlit as st
 import requests
 import json
+import re
 from dotenv import load_dotenv
 
 # For local development, load environment variables from the .env file.
@@ -81,12 +82,22 @@ def run_flow(user_message: str) -> str:
 # 3. Streamlit UI Interface
 #    Provides a simple user interface to send messages and display the chatbot response.
 # --------------------------
+def highlight_think(text: str) -> str:
+    """
+    Wraps any text between <think> and </think> tags in a styled div
+    with a gray background.
+    """
+    pattern = re.compile(r'(<think>)(.*?)(</think>)', re.DOTALL)
+    # Replace with a div with gray background and some padding.
+    highlighted = pattern.sub(r'<div style="background-color: #eee; padding: 5px; border-radius: 5px;">\2</div>', text)
+    return highlighted
+
 def main():
     # Custom header with two lines: first line is larger, second line is smaller.
     st.markdown(
         """
         <h3>Conversational Chatbot</h3>
-        <p style="font-size:16px;">powered by DeepSeek-R1-distill-Qwen32B with Inference via Groq</p>
+        <p style="font-size:16px;">enabled by DeepSeek-R1-distill-Qwen32B via Groq</p>
         """,
         unsafe_allow_html=True,
     )
@@ -98,7 +109,9 @@ def main():
     if st.button("Send"):
         if user_input.strip():
             answer = run_flow(user_input)
-            st.write(f"**Bot:** {answer}")
+            # Highlight any <think> blocks in the answer.
+            answer_html = highlight_think(answer)
+            st.markdown(f"**Bot:** {answer_html}", unsafe_allow_html=True)
         else:
             st.warning("Please enter a message first.")
 
