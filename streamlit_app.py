@@ -36,30 +36,33 @@ def run_flow(user_message: str) -> str:
     Sends the user's message to the Langflow flow and returns the LLM's response.
     """
     endpoint = f"{BASE_API_URL}/lf/{LANGFLOW_ID}/api/v1/run/{FLOW_ID}"
-    # Setup the headers with the authorization token and content type
     headers = {
         "Authorization": f"Bearer {APPLICATION_TOKEN}",
         "Content-Type": "application/json"
     }
-    # Prepare the payload to send to the API
     payload = {
         "input_value": user_message,
-        "output_type": "chat",   # Expected output type
-        "input_type": "chat"     # Expected input type
+        "output_type": "chat",
+        "input_type": "chat"
     }
 
-    # Send the POST request to the Langflow API
     response = requests.post(endpoint, json=payload, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        # Optional: uncomment the next line to see the full API response for debugging
-        # st.write("Debug API response:", data)
-        # Try to retrieve the output using both "Text" and "text" keys.
+        # Uncomment this line to display the full API response for debugging.
+        st.write("Debug: API response", json.dumps(data, indent=2))
+        # Try to retrieve the output using both keys.
         output = data.get("Text") or data.get("text")
-        return output if output else "No output found in response."
+        if output:
+            return output
+        else:
+            st.error("No output found. API response structure is unexpected:")
+            st.json(data)
+            return "Error: Unexpected API response structure. Please check the debug output above."
     else:
-        # Return an error message if the request failed
-        return f"Error: {response.status_code} - {response.text}"
+        error_msg = f"Error: {response.status_code} - {response.text}"
+        st.error(error_msg)
+        return error_msg
 
 # --------------------------
 # 3. Streamlit UI Interface
