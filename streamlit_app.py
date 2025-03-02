@@ -49,7 +49,6 @@ def run_flow(user_message: str) -> str:
     response = requests.post(endpoint, json=payload, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        st.write("Debug: API response", json.dumps(data, indent=2))
         # First, check for a top-level key.
         output = data.get("Text") or data.get("text")
         if output:
@@ -69,6 +68,7 @@ def run_flow(user_message: str) -> str:
                 # Fallback to check directly in message.
                 if message.get("text"):
                     return message.get("text")
+
         st.error("No output found. API response structure is unexpected:")
         st.json(data)
         return "Error: Unexpected API response structure. Please check the debug output above."
@@ -83,7 +83,7 @@ def run_flow(user_message: str) -> str:
 # --------------------------
 def main():
     # Display the title of the app
-    st.title("Conversational Chatbot with DeepSeek-r1-distill-Qwen-32B via Grok")
+    st.title("Conversational Chatbot enabled by DeepSeek-R1-distill-Qwen32B via Grok")
 
     # Input field for the user to type a message
     user_input = st.text_input("Enter your message:")
