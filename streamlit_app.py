@@ -82,9 +82,12 @@ def run_flow(user_message: str) -> str:
 #    Provides a simple user interface to send messages and display the chatbot response.
 # --------------------------
 def main():
-    # Custom header using an H3 tag. Removed centering style so it is left-aligned.
+    # Custom header with two lines: first line is larger, second line is smaller.
     st.markdown(
-        "<h3>Conversational Chatbot enabled by DeepSeek-R1-distill-Qwen32B via Grok</h3>",
+        """
+        <h3>Conversational Chatbot</h3>
+        <p style="font-size:16px;">enabled by DeepSeek-R1-distill-Qwen32B via Grok</p>
+        """,
         unsafe_allow_html=True,
     )
 
