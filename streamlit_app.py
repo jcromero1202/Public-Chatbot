@@ -85,11 +85,11 @@ def run_flow(user_message: str) -> str:
 def highlight_think(text: str) -> str:
     """
     Wraps any text between <think> and </think> tags in a styled div
-    with a gray background.
+    with a dark gray background and white text.
     """
     pattern = re.compile(r'(<think>)(.*?)(</think>)', re.DOTALL)
-    # Replace with a div with gray background and some padding.
-    highlighted = pattern.sub(r'<div style="background-color: #eee; padding: 5px; border-radius: 5px;">\2</div>', text)
+    # Updated style: dark gray background (#444) with white text.
+    highlighted = pattern.sub(r'<div style="background-color: #444; color: #fff; padding: 5px; border-radius: 5px;">\2</div>', text)
     return highlighted
 
 def main():
