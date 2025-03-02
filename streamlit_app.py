@@ -86,7 +86,7 @@ def main():
     st.markdown(
         """
         <h3>Conversational Chatbot</h3>
-        <p style="font-size:16px;">enabled by DeepSeek-R1-distill-Qwen32B via Grok</p>
+        <p style="font-size:16px;">powered by DeepSeek-R1-distill-Qwen32B with Inference via Groq</p>
         """,
         unsafe_allow_html=True,
     )
