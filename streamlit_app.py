@@ -82,20 +82,19 @@ def run_flow(user_message: str) -> str:
 #    Provides a simple user interface to send messages and display the chatbot response.
 # --------------------------
 def main():
-    # Custom header (smaller than st.title but bigger than normal text)
+    # Custom header using an H3 tag. Removed centering style so it is left-aligned.
     st.markdown(
-        "<h3 style='text-align: left;'>Conversational Chatbot enabled by DeepSeek-R1-distill-Qwen32B via Grok</h3>",
+        "<h3>Conversational Chatbot enabled by DeepSeek-R1-distill-Qwen32B via Grok</h3>",
         unsafe_allow_html=True,
     )
 
-    # Replace the single-line text input with a multi-line text area for longer prompts.
+    # Multi-line text area for long messages.
     user_input = st.text_area("Enter your message:", height=150)
 
-    # When the "Send" button is clicked, process the input
+    # When the "Send" button is clicked, process the input.
     if st.button("Send"):
         if user_input.strip():
             answer = run_flow(user_input)
-            # Display the chatbot's response
             st.write(f"**Bot:** {answer}")
         else:
             st.warning("Please enter a message first.")
